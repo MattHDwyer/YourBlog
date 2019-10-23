@@ -1,13 +1,12 @@
-const dbConnection = (err) => {
-    if (err) {
-        console.log(`db not connected`);
-    } else {
-        console.log(`db connected`);
-    }
-};
+const { mongoose } = require('./app-utilities')
 
-const db = 'mongodb://localhost:27017/newsToYou-V1';
+const db = require('./config/keys').MongoURI;
+
 const dbOptions = { useNewUrlParser: true, useUnifiedTopology: true };
+
+const dbConnection = mongoose.connect(db, dbOptions)
+    .then(() => console.log('MongoDB Connected...'))
+    .catch(err => console.log(err))
 
 module.exports = {
     db,

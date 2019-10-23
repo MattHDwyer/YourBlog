@@ -10,7 +10,7 @@ router.post('/register', express.urlencoded({extended: false}), async (req,res) 
     try {
         let user = new User(req.body)
         await user.save()
-        res.redirect('/register-profile')
+        res.redirect('/login')
     } catch (err) {
         res.status(500).send(err)
     }
