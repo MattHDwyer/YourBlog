@@ -1,16 +1,16 @@
-const { express, router, mongoose, passport } = require('../app-utilities')
-require('../config/passport')(passport)
+const { express, router, mongoose, passport, bcrypt } = require('../app-utilities')
+const User = require('../models/User')
 
 router.get('/login', async (req,res) => {
     res.render('login')
 })
 
-router.post('/login', async (req,res,next) => {
-    passport.authenticate('local', { 
-        successRedirect: '/register-profile',
+router.post('/login', (req, res, next) => {
+    passport.authenticate('local', {
+        successRedirect: '/dashboard',
         failureRedirect: '/login',
-        failureFlash: true 
-    })(req,res,next);
+        failureFlash: true
+    })(req, res, next);
 });
 
 

@@ -1,4 +1,4 @@
-const { express, morgan, mongoose, expressLayouts, passport, session } = require('./app-utilities')
+const { express, morgan, mongoose, expressLayouts, passport, session, flash } = require('./app-utilities')
 
 const app = express();
 const PORT = process.env.port || 4000;
@@ -9,6 +9,20 @@ app.use(morgan('dev'));
 const { db, dbOptions, dbConnection } = require('./database-utilities');
 
 
+// Passport Middleware
+require('./config/passport')(passport)
+app.use(passport.initialize());
+app.use(passport.session());
+
+
+// Views with EJS
+app.use(expressLayouts)
+app.set('view engine', 'ejs')
+
+// 
+app.use(express.urlencoded({ extended: false }))
+
+
 // Express Session
 app.use(session({
     secret: 'secret',
@@ -16,14 +30,18 @@ app.use(session({
     saveUninitialized: true
 }))
 
-// Passport Middleware
-require('./config/passport')(passport)
-app.use(passport.initialize());
-app.use(passport.session());
+// Global Flash
+app.use(flash());
 
-// Views with EJS
-app.use(expressLayouts)
-app.set('view engine', 'ejs')
+// Global Vars:
+app.use((req,res,next) => {
+    res.locals.success_msg = req.flash('success_msg');
+    res.locals.error_msg = req.flash('error_msg');
+    res.locals.error = req.flash('error');
+    next();
+});
+
+
 
 // Routes:
 app.use('/', require('./routes/index'))
