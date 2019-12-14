@@ -1,16 +1,24 @@
-const { express, morgan, mongoose, expressLayouts, passport, session, flash } = require('./app-utilities')
+const { express, morgan, mongoose, expressLayouts, session, flash } = require('./app-utilities')
 
 const app = express();
 const PORT = process.env.port || 4000;
 
 app.use(morgan('dev'));
 
-// DB Config:
+// DB Config :
+/* Is the line below necessary? Or can it remain in database-utilities */
 const { db, dbOptions, dbConnection } = require('./database-utilities');
+
+// Express Session
+app.use(session({
+    secret: 'secret',
+    resave: true,
+    saveUninitialized: true
+}))
 
 
 // Passport Middleware
-require('./config/passport')(passport)
+const passport = require('./config/passport')
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -21,14 +29,6 @@ app.set('view engine', 'ejs')
 
 // 
 app.use(express.urlencoded({ extended: false }))
-
-
-// Express Session
-app.use(session({
-    secret: 'secret',
-    resave: true,
-    saveUninitialized: true
-}))
 
 // Global Flash
 app.use(flash());
@@ -44,13 +44,13 @@ app.use((req,res,next) => {
 
 
 // Routes:
-app.use('/', require('./routes/index'))
-app.use('/admin', require('./routes/admin'))
-app.use('/register', require('./routes/register'))
-app.use('/profile', require('./routes/profile'))
-app.use('/login', require('./routes/login'))
+app.use('/', require('./routes/index'));
+app.use('/admin', require('./routes/admin'));
+app.use('/register', require('./routes/register'));
+app.use('/profile', require('./routes/profile'));
+app.use('/login', require('./routes/login'));
+app.use('/logout', require('./routes/logout'));
 
 
 
 app.listen(PORT, () => console.log(`Listening on Port: ${PORT}`));
-

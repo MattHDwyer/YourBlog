@@ -13,6 +13,10 @@ var userSchema = new Schema ({
     date: {
         type: Date,
         default: Date.now
+    },
+    profileId: {
+        type: Schema.Types.ObjectId,
+        ref: 'Profile'
     }
 })
 

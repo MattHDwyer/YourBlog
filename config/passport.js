@@ -1,9 +1,8 @@
 const LocalStrategy = require('passport-local').Strategy;
-const { express, morgan, mongoose, expressLayouts, passport, session, flash, bcrypt } = require('../app-utilities')
+const { bcrypt, passport } = require('../app-utilities')
 
 const User = require('../models/User')
 
-module.exports = (passport) => {
 passport.use(
     new LocalStrategy({ usernameField: 'email' }, (email,password,done) => {
     // User Validation
@@ -38,6 +37,5 @@ passport.use(
     });
   });
 
-
-}
+  module.exports = passport
 

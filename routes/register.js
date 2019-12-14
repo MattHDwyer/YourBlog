@@ -42,6 +42,7 @@ router.post('/register', express.urlencoded({extended: false}), async (req,res) 
                     });
                 } else {
                     const newUser = new User({ 
+                        profileId: null,
                         email,
                         password});
                         bcrypt.genSalt(15, (err, salt) => 
@@ -58,14 +59,6 @@ router.post('/register', express.urlencoded({extended: false}), async (req,res) 
                 }
             });
     }
-    
-    // try {
-    //     let user = new User(req.body)
-    //     await user.save()
-    //     res.redirect('/login')
-    // } catch (err) {
-    //     res.status(500).send(err)
-    // }
 })
 
 

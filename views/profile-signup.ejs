@@ -1,13 +1,40 @@
-<form action="/register-profile" method="POST" class="form-example">
-    <div class="form-example">
-      <label for="name">Enter your Profile Name:</label>
-      <input type="text" name="name" id="name" required>
+<h1>Profile Registration:</h1>
+
+<div class="form-group row">
+  <label for="staticEmail" class="col-sm-2 col-form-label"> email: </label>
+  <div class="col-sm-10">
+    <input type="text" readonly="" class="form-control-plaintext" id="staticEmail" value=<%= user.email %>>
+  </div>
+</div>
+
+<form action="/register-profile" method="POST">
+  <fieldset>
+    <legend></legend>
+    <% include ./partials/messages %>
+
+    <div class="form-group">
+      <label for="profile-name">Name</label>
+      <input 
+      type="text" 
+      class="form-control" 
+      name="name"
+      aria-describedby="textHelp" 
+      placeholder="Enter Profile Name">
+      <small id="name" class="form-text text-muted">This cannot be changed once you hit submit </small>
     </div>
-    <div class="form-example">
-      <label for="bio">Please give a short biography: </label>
-      <input type="text" name="bio" id="bio">
+  
+    
+    <div class="form-group">
+      <label for="profile-bio">Bio:</label>
+      <small id="bio" 
+      class="form-text text-muted"> 
+      What is your blog about? 
+      </small>
+      <textarea class="form-control" name="bio" rows="3"></textarea>
     </div>
-    <div class="form-example">
-      <input type="submit" value="Subscribe!">
-    </div>
-  </form>
+    
+    
+    
+    <button type="submit" class="btn btn-primary btn-block">Submit</button>
+  </fieldset>
+</form>
