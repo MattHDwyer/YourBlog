@@ -2,6 +2,8 @@ const { express, router, mongoose } = require('../app-utilities')
 const User = require('../models/User')
 const Profile = require('../models/Profile')
 
+/* This 'admin' route is for development use only. Will be removed once developed. */
+
 router.get('/admin', (req,res) => {
     res.send('admin_welcome')
 })

@@ -1,5 +1,7 @@
 # Your Blog:
-YourBlog is a site designed so that people can sign up, create journalism/blog articles and then share them with the public for free.
+YourBlog is a small side project I've started. It's a site designed so that people can sign up, create journalism/blog articles and then share them with the public for free.
+
+Deployed: **coming soon**
 
 
 ## Purpose:
