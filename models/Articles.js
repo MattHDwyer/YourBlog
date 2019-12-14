@@ -13,6 +13,11 @@ var articleSchema = new Schema ({
     text: {
         type: String,
         required: true
+    },
+    date: {
+        type: Date,
+        default: Date.now,
+        required: true
     }
 })
 
