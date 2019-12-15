@@ -44,7 +44,7 @@ const profileSetup = async (req, res) => {
                                 currentUser.profileId = doc._id
                                 currentUser.save((err, result) => {
                                     req.flash('success_msg', "Your Profile is now setup!")
-                                    res.redirect('/dashboard')
+                                    res.redirect(`/u/${newProfile.name}`)
                                 })
                             })
                             .catch(err => console.log(err));

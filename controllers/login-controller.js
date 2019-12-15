@@ -1,7 +1,8 @@
-const { express, router, mongoose, passport, bcrypt } = require('../app-utilities')
+const { express, router, mongoose, passport, bodyParser, bcrypt } = require('../app-utilities')
 const User = require('../models/User')
 const Profile = require('../models/Profile')
 
+/* Function below is to authenticate users as they login, if successful the site behind the scenes goes to the route /profile-exist, otherwise returns error on the /login route R*/
 const login = async (req, res, next) => {
     passport.authenticate('local', {
         successRedirect: '/profile-exist',
@@ -10,12 +11,14 @@ const login = async (req, res, next) => {
     })(req, res, next);
 }
 
+/* Function below checks to make sure that the user has an existing Profile attached to their account (after initial Passport auth passes), if so they're redirected to their page, if not they're redirected to the profile registration page */
 const profileExist = async (req, res, next) => {
     const currentUser = await User.findOne({ _id: req.user.id })
     if(!currentUser.profileId){
         res.redirect('/register-profile')
     } else {
-        res.redirect('/dashboard')
+        const currentProfile = await Profile.findOne({ _id: currentUser.profileId })
+        res.redirect(`/${currentProfile.name}`)
     }
 }
 

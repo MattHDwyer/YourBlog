@@ -9,8 +9,8 @@ const {
 router.get('/login', async (req,res) => {
     res.render('login')
 });
-router.post('/login', login, profileExist);
+router.post('/login', login);
 router.get('/profile-exist', profileExist);
-router.get('/logout', logout)
+router.get('/logout', logout);
 
 module.exports = router;
