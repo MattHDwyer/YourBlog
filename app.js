@@ -51,7 +51,7 @@ app.use('/admin', require('./routes/admin'));
 app.use('/register', require('./routes/register'));
 app.use('/profile', require('./routes/profile'));
 app.use('/login', require('./routes/login'));
-app.use('/u/:id', require('./routes/display'));
+app.use('/:id', require('./routes/display'));
 
 
 
