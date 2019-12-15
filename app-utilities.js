@@ -7,6 +7,7 @@ const passport = require('passport');
 const session = require('express-session');
 const flash = require('connect-flash');
 const bcrypt = require('bcryptjs')
+const bodyParser = require('body-parser')
 
 
 module.exports = {
@@ -18,5 +19,6 @@ module.exports = {
     passport,
     expressLayouts,
     flash,
-    bcrypt
+    bcrypt,
+    bodyParser
 }

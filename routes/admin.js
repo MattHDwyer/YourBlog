@@ -12,7 +12,6 @@ router.get('/admin', (req,res) => {
 router.get('/users', async (req,res) => {
     try {
         let user = await User.find()
-        console.log(user);
         res.send(user);
     } catch (err) {
         res.status(500).send(err)
@@ -22,7 +21,6 @@ router.get('/users', async (req,res) => {
 router.get('/profiles', async (req, res) => {
     try {
         let profile = await Profile.find()
-        console.log(profile);
         res.send(profile);
     } catch (err) {
         res.status(500).send(err)

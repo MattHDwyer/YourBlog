@@ -1,4 +1,4 @@
-const { express, morgan, mongoose, expressLayouts, session, flash } = require('./app-utilities')
+const { express, morgan, mongoose, expressLayouts, session, flash, bodyParser } = require('./app-utilities')
 
 const app = express();
 const PORT = process.env.port || 4000;
@@ -29,6 +29,7 @@ app.set('view engine', 'ejs')
 
 // 
 app.use(express.urlencoded({ extended: false }))
+app.use(bodyParser.json())
 
 // Global Flash
 app.use(flash());
@@ -41,7 +42,8 @@ app.use((req,res,next) => {
     next();
 });
 
-
+// Adding 
+app.use( express.static("public") ); 
 
 // Routes:
 app.use('/', require('./routes/index'));
@@ -49,7 +51,7 @@ app.use('/admin', require('./routes/admin'));
 app.use('/register', require('./routes/register'));
 app.use('/profile', require('./routes/profile'));
 app.use('/login', require('./routes/login'));
-app.use('/logout', require('./routes/logout'));
+app.use('/u/:id', require('./routes/display'));
 
 
 
